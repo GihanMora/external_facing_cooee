@@ -45,11 +45,12 @@ elif uploaded_files:
     #manual chunking based on pages.
     docs = documents
     
+    persist_directory = 'db'
     
     #extract embeddings
     embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
     #vstore with metadata. Here we will store page numbers.
-    vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources])
+    vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
     #deciding model
     model_name = "gpt-3.5-turbo"
     # model_name = "gpt-4"
