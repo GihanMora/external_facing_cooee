@@ -45,7 +45,7 @@ elif uploaded_files:
     #manual chunking based on pages.
     docs = documents
     
-    persist_directory = 'db'
+    persist_directory = './Vector_store/'
     
     #extract embeddings
     embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
