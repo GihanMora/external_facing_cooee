@@ -45,7 +45,7 @@ st.write("---")
 #manual chunking based on pages.
 # docs = documents
 
-persist_directory = './Vector_store/index/'
+persist_directory = './Vector_store/'
 
 #extract embeddings
 embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
