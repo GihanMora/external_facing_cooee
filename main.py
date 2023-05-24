@@ -7,7 +7,7 @@ from langchain import OpenAI, VectorDBQA
 from langchain.chains import RetrievalQAWithSourcesChain
 import PyPDF2
 
-st.image("./Data/Capture.png")
+st.image("./Data/Capture.PNG")
 
 #This function will go through pdf and extract and return list of page texts.
 def read_and_textify(files):
