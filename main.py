@@ -30,53 +30,53 @@ st.header("Cooee - Document Question Answering")
 st.write("---")
 
 #file uploader
-uploaded_files = st.file_uploader("Upload documents",accept_multiple_files=True, type=["txt","pdf"])
-st.write("---")
-if uploaded_files  is None:
-    st.info(f"""Upload files to analyse""")
+# uploaded_files = st.file_uploader("Upload documents",accept_multiple_files=True, type=["txt","pdf"])
+# st.write("---")
+# if uploaded_files  is None:
+#     st.info(f"""Upload files to analyse""")
 
-#Use vectorDB to QnA
-elif uploaded_files:
-    st.write(str(len(uploaded_files)) + " document(s) loaded..")
-    #get text from documents
-    textify_output = read_and_textify(uploaded_files)
-    documents = textify_output[0]
-    sources = textify_output[1]
-    #manual chunking based on pages.
-    docs = documents
-    
-    persist_directory = './Vector_store/'
-    
-    #extract embeddings
-    embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
-    #vstore with metadata. Here we will store page numbers.
-    
-    vStore = Chroma(persist_directory=persist_directory, embedding_function=embedding)
+# #Use vectorDB to QnA
+# elif uploaded_files:
+# st.write(str(len(uploaded_files)) + " document(s) loaded..")
+#get text from documents
+# textify_output = read_and_textify(uploaded_files)
+# documents = textify_output[0]
+# sources = textify_output[1]
+#manual chunking based on pages.
+# docs = documents
+
+persist_directory = './Vector_store/'
+
+#extract embeddings
+embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
+#vstore with metadata. Here we will store page numbers.
+
+vStore = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 #     vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
-    #deciding model
-    model_name = "gpt-3.5-turbo"
-    # model_name = "gpt-4"
-    
-    retriever = vStore.as_retriever()
-    retriever.search_kwargs = {'k':2}
-    
-    #initiate model
-    llm = OpenAI(model_name=model_name, openai_api_key = st.secrets["openai_api_key"], streaming=True)
-    model = RetrievalQAWithSourcesChain.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
-    
+#deciding model
+model_name = "gpt-3.5-turbo"
+# model_name = "gpt-4"
 
-    st.header("Ask your data")
-    user_q = st.text_area("Enter your question here")
-    if st.button("Get Response"):
-            try:
-                # create gpt prompt
-                # result = model.run(user_q)
-                with st.spinner("Cooee is working on it..."):
-                    result = model({"question": user_q}, return_only_outputs=True)
-                    st.subheader('Your response:')
-                    st.write(result['answer'])
-                    st.subheader('Source pages:')
-                    st.write(result['sources'])
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-                st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
+retriever = vStore.as_retriever()
+retriever.search_kwargs = {'k':2}
+
+#initiate model
+llm = OpenAI(model_name=model_name, openai_api_key = st.secrets["openai_api_key"], streaming=True)
+model = RetrievalQAWithSourcesChain.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
+
+
+st.header("Ask your data")
+user_q = st.text_area("Enter your question here")
+if st.button("Get Response"):
+        try:
+            # create gpt prompt
+            # result = model.run(user_q)
+            with st.spinner("Cooee is working on it..."):
+                result = model({"question": user_q}, return_only_outputs=True)
+                st.subheader('Your response:')
+                st.write(result['answer'])
+                st.subheader('Source pages:')
+                st.write(result['sources'])
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+            st.error('Oops, the GPT response resulted in an error :( Please try again with a different question.')
