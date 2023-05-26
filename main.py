@@ -26,7 +26,7 @@ def read_and_textify(files):
 
 # centered page layout
 st.set_page_config(layout="centered", page_title="Cooee - Document QA")
-st.header("Cooee - Document Question Answering")
+st.header("Cooee - Public Extension")
 st.write("---")
 
 #file uploader
@@ -52,7 +52,7 @@ embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
 #vstore with metadata. Here we will store page numbers.
 
 vStore = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
-st.write(vStore.get())
+# st.write(vStore.get())
 #     vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
 #deciding model
 model_name = "gpt-3.5-turbo"
