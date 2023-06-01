@@ -75,7 +75,7 @@ if st.button("Get Response"):
             with st.spinner("Cooee is working on it..."):
                 result = model({"query": user_q}, return_only_outputs=True)
                 st.subheader('Your response:')
-                st.write(result['answer'])
+                st.write(result)
                 st.subheader('Source pages:')
                 st.write(result['sources'])
         except Exception as e:
