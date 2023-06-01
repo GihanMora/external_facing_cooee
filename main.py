@@ -55,7 +55,7 @@ vStore = Chroma(persist_directory=persist_directory, embedding_function=embeddin
 st.write(vStore.get())
 #     vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
 #deciding model
-# model_name = "gpt-3.5-turbo"
+model_name = "gpt-3.5-turbo"
 # # model_name = "gpt-4"
 
 # retriever = vStore.as_retriever()
