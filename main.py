@@ -3,7 +3,7 @@ from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
-
+import pinecone 
 
 # centered page layout
 st.set_page_config(layout="centered", page_title="Cooee - Document QA")
