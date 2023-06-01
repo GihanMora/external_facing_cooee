@@ -24,15 +24,9 @@ def get_similiar_docs(query,k=2,score=False):
   return similar_docs
 
 
-
-st.write(vStore.get())
-#     vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
 #deciding model
 model_name = "gpt-3.5-turbo"
 # # model_name = "gpt-4"
-
-# retriever = vStore.as_retriever()
-# retriever.search_kwargs = {'k':2}
 
 # #initiate model
 llm = OpenAI(model_name=model_name, openai_api_key = st.secrets["openai_api_key"], streaming=True)
