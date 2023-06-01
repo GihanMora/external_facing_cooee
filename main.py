@@ -12,6 +12,14 @@ st.write("---")
 
 
 embeddings = OpenAIEmbeddings(openai_api_key = st.secrets["openai_api_key"])
+
+# initialize pinecone
+pinecone.init(
+    api_key=st.secrets["pinecone_api_key"],  # find at app.pinecone.io
+    environment="us-west1-gcp-free"  # next to api key in console
+)
+
+
 index_name = "external-facing-cooee"
 
 index = Pinecone.from_existing_index(index_name, embeddings)
