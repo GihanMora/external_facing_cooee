@@ -62,9 +62,9 @@ st.write(vStore.get())
 # retriever.search_kwargs = {'k':2}
 
 # #initiate model
-# llm = OpenAI(model_name=model_name, openai_api_key = st.secrets["openai_api_key"], streaming=True)
+llm = OpenAI(model_name=model_name, openai_api_key = st.secrets["openai_api_key"], streaming=True)
 # model = RetrievalQAWithSourcesChain.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
-model = VectorDBQA.from_chain_type(llm=OpenAI(), chain_type="stuff", vectorstore=vectordb)
+model = VectorDBQA.from_chain_type(llm=llm, chain_type="stuff", vectorstore=vectordb)
 
 st.header("Ask your data")
 user_q = st.text_area("Enter your question here")
