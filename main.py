@@ -24,7 +24,7 @@ def get_similiar_docs(query,k=2,score=False):
   return similar_docs
 
 
-vStore = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
+
 st.write(vStore.get())
 #     vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
 #deciding model
