@@ -64,7 +64,7 @@ model_name = "gpt-3.5-turbo"
 # #initiate model
 llm = OpenAI(model_name=model_name, openai_api_key = st.secrets["openai_api_key"], streaming=True)
 # model = RetrievalQAWithSourcesChain.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
-model = VectorDBQA.from_chain_type(llm=llm, chain_type="stuff", vectorstore=vectordb)
+model = VectorDBQA.from_chain_type(llm=llm, chain_type="stuff", vectorstore=vStore)
 
 st.header("Ask your data")
 user_q = st.text_area("Enter your question here")
