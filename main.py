@@ -23,10 +23,7 @@ def get_similiar_docs(query,k=2,score=False):
     similar_docs = index.similarity_search(query,k=k)
   return similar_docs
 
-# model_name = "text-davinci-003"
-model_name = "gpt-3.5-turbo"
-# model_name = "gpt-4"
-llm = OpenAI(model_name=model_name)
+
 vStore = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 st.write(vStore.get())
 #     vStore = Chroma.from_texts(docs, embeddings, metadatas=[{"source": s} for s in sources], persist_directory=persist_directory)
