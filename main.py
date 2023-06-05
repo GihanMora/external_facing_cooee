@@ -54,7 +54,7 @@ def get_answer(query):
     sources.append(d.metadata['source'])
   return  {'Answer':answer,'Sources':sources}
 
-st.header("Ask Cooee our chatbot about Sustainability at Latrobe?")
+st.header("Ask Cooee our chatbot about Sustainability at Latrobe..")
 user_q = st.text_area("Enter your question here")
 if st.button("Get Response"):
         try:
