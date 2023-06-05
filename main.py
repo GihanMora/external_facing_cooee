@@ -24,11 +24,11 @@ index_name = "external-facing-cooee"
 
 index = Pinecone.from_existing_index(index_name, embeddings)
 
-def get_similiar_docs(query,k=2,score=False):
+def get_similiar_docs(query,score=False):
   if score:
-    similar_docs = index.similarity_search_with_score(query,k=k)
+    similar_docs = index.similarity_search_with_score(query)
   else:
-    similar_docs = index.similarity_search(query,k=k)
+    similar_docs = index.similarity_search(query)
   return similar_docs
 
 
